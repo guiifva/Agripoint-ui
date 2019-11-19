@@ -18,11 +18,6 @@ export default function SubscriptionList({ list, onItemClick, selected }) {
                     />
                 ))}
             </CardList>
-            <Row className="justify-content-center">
-                <Link to={`/Order/${selected}`}>
-                    <Button>Assine agora</Button>
-                </Link>
-            </Row>
         </Container>
     ) : (
         'a lista ta vazia'

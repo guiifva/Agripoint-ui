@@ -30,10 +30,6 @@ export const Form = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
-    img {
-        width: 100px;
-        margin: 10px 0 40px;
-    }
     p {
         color: #ff3333;
         margin-bottom: 15px;
@@ -54,15 +50,6 @@ export const Form = styled.form`
         &::placeholder {
             color: #999;
         }
-    }
-    button {
-        color: #fff;
-        font-size: 16px;
-        background: #fc6963;
-        height: 56px;
-        border: 0;
-        border-radius: 5px;
-        width: 100%;
     }
     hr {
         margin: 20px 0;

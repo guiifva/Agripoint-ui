@@ -1,6 +1,7 @@
 import React from 'react';
-import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import Order from './pages/Order';
 import Main from './pages/Main';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
@@ -27,6 +28,10 @@ const Routes = () => (
             <Route exact path="/" component={SignIn} />
             <Route path="/signup" component={SignUp} />
             <PrivateRoute path="/SubscriptionPlans" component={Main} />
+            <PrivateRoute
+                path="/Order/:subscriptionPlansId"
+                component={Order}
+            />
             <Route path="*" component={() => <h1>Page not found</h1>} />
         </Switch>
     </BrowserRouter>

@@ -1,4 +1,4 @@
-export const TOKEN_KEY = '';
+export const TOKEN_KEY = 'tokenSite';
 export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
 export const getToken = () => localStorage.getItem(TOKEN_KEY);
 export const login = token => {

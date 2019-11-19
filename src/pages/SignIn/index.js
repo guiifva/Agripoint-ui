@@ -1,68 +1,64 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 
 import api from '../../services/api';
 import { login } from '../../services/auth';
 
-import { Form, Container } from './styles';
+import { Form, Container, Btn } from './styles';
 
-class SignIn extends Component {
-    state = {
-        email: '',
-        password: '',
-        error: '',
-    };
+export default function SignIn() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-    handleSignIn = async e => {
+    const handleSignIn = async e => {
         e.preventDefault();
-        const { email, password, confirmPassword } = this.state;
+
         if (!email || !password) {
-            this.setState({ error: 'Preencha e-mail e senha para continuar!' });
+            setError('preencha corretamente os campos!');
         } else {
-            try {
-                const response = await api.post('/Login/SignIn', {
-                    email,
-                    password,
-                    confirmPassword,
+            api.post('/Login/SignIn', {
+                email: email,
+                password: password,
+                confirmPassword: password,
+            })
+                .then(res => {
+                    login(res.data);
+                    return <Redirect to="/Main" />;
+                })
+                .catch(err => {
+                    setError(
+                        `Não foi possivel realizar o login, erros: ${err.errors}`
+                    );
                 });
-                login(response.data);
-                this.props.history.push('/SubscriptionPlans');
-            } catch (err) {
-                this.setState({
-                    error:
-                        'Houve um problema com o login, verifique suas credenciais.',
-                });
-            }
         }
     };
 
-    render() {
-        return (
+    return (
+        <>
             <Container>
-                <Form onSubmit={this.handleSignIn}>
-                    {this.state.error && <p>{this.state.error}</p>}
+                <Form onSubmit={handleSignIn}>
+                    <img
+                        src={require('../../assets/educapointIcon.jpg')}
+                        className="img-fluid"
+                        alt="Logo da empresa Agripoint"
+                    />
+                    {error && <p>{error}</p>}
                     <input
                         type="email"
                         placeholder="Endereço de e-mail"
-                        onChange={e => this.setState({ email: e.target.value })}
+                        onChange={e => setEmail(e.target.value)}
                     />
                     <input
                         type="password"
                         placeholder="Senha"
-                        onChange={e =>
-                            this.setState({
-                                password: e.target.value,
-                                confirmPassword: e.target.value,
-                            })
-                        }
+                        onChange={e => setPassword(e.target.value)}
                     />
-                    <button type="submit">Entrar</button>
+                    <Btn type="submit">Entrar</Btn>
                     <hr />
                     <Link to="/signup">Criar conta grátis</Link>
                 </Form>
             </Container>
-        );
-    }
+        </>
+    );
 }
-
-export default withRouter(SignIn);

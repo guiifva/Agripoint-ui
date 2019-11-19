@@ -38,6 +38,7 @@ export default function SignUp() {
     const [street, setStreet] = useState('');
     const [placeNumber, setPlaceNumber] = useState('');
     const [complement, setComplement] = useState('');
+    const [cpf, setCpf] = useState('');
     const [error, setError] = useState('');
 
     const handleSignUp = async e => {
@@ -47,29 +48,27 @@ export default function SignUp() {
         } else if (!isEmail(email)) {
             setError('Informe um e-mail válido!');
         } else {
-            try {
-                const response = await api.post('/Login/Register', {
-                    email: email,
-                    password: password,
-                    userName: userName,
-                    confirmPassword: confirmPassword,
-                    addressViewModel: {
-                        state: state,
-                        zipCode: zipCode,
-                        street: street,
-                        city: city,
-                        placeNumber: placeNumber,
-                        complement: complement,
-                    },
+            api.post('/Login/Register', {
+                email: email,
+                password: password,
+                userName: userName,
+                confirmPassword: confirmPassword,
+                cpf: cpf,
+                addressViewModel: {
+                    state: state,
+                    zipCode: zipCode,
+                    street: street,
+                    city: city,
+                    placeNumber: placeNumber,
+                    complement: complement,
+                },
+            })
+                .then(resp => {
+                    this.props.history.push('/SignIn');
+                })
+                .catch(err => {
+                    console.log(err.title);
                 });
-
-                this.props.history.push('/SignIn');
-            } catch (err) {
-                console.log(err);
-                setError(
-                    'Houve um problema com o login, verifique suas credenciais.'
-                );
-            }
         }
     };
 
@@ -152,7 +151,7 @@ export default function SignUp() {
                     value={city}
                     type="text"
                     placeholder="Cidade"
-                    onChange={e => setState(e.target.value)}
+                    onChange={e => setCity(e.target.value)}
                     id="city"
                 />
                 <input
@@ -172,6 +171,13 @@ export default function SignUp() {
                     type="text"
                     placeholder="Complemento"
                     onChange={e => setComplement(e.target.value)}
+                />
+                <hr />
+                <input
+                    value={cpf}
+                    type="text"
+                    placeholder="CPF"
+                    onChange={e => setCpf(e.target.value)}
                 />
                 <button type="submit">Cadastrar grátis</button>
                 <hr />
