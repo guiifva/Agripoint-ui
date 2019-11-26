@@ -1,9 +1,8 @@
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
 import Subscription from './Subscription';
-import { CardList, Button } from './styles';
+import { CardList } from './styles';
 
 export default function SubscriptionList({ list, onItemClick, selected }) {
     return list && list.length > 0 ? (

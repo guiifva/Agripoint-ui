@@ -1,24 +1,7 @@
 import styled from 'styled-components';
 
-export const Lista = styled.ul`
-    margin-left: 5px;
-
-    li {
-        margin-top: 10px;
-        padding: 2px;
-    }
-`;
-
-export const Img = styled.img`
-    display: flex;
-    margin-right: 5px;
-    margin-left: 25px;
-    max-height: 50px;
-    max-width: 50px;
-`;
-
 export const Button = styled.button`
-    margin-top: 20px;
+    margin-top: 50px;
     justify-content: center;
     width: 250px;
     height: 60px;
@@ -34,4 +17,18 @@ export const Button = styled.button`
         text-decoration: none;
         font-size: 110%;
     }
+`;
+
+export const Title = styled.h1`
+    width: 100%;
+    text-align: center;
+    color: orange;
+    margin-top: 50px;
+`;
+
+export const SubTitle = styled.p`
+    width: 100%;
+    text-align: center;
+    color: gray;
+    font-size: 1.2rem;
 `;

@@ -12,15 +12,32 @@ export const ItemWrap = styled.div`
     flex: 1;
 `;
 
+export const Button = styled.button`
+    margin-top: 20px;
+    justify-content: center;
+    width: 250px;
+    height: 60px;
+    color: orange !important;
+    background-color: gray;
+
+    a {
+        color: inherit;
+    }
+
+    a:hover {
+        color: inherit;
+        text-decoration: none;
+        font-size: 110%;
+    }
+`;
+
 export const Btn = styled.button`
-    color: #fff !important;
+    background-color: orange;
     font-size: 12px !important;
-    background: gray !important;
-    height: 20px !important;
+    height: 40px !important;
     border: 0 !important;
-    border-radius: 5px !important;
-    width: 100% !important;
-    margin-bottom: 15px;
+    border-radius: 100% !important;
+    width: 60% !important;
 `;
 
 export const Form = styled.form`

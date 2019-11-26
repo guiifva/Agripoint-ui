@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 import api from '../../services/api';
-import { login } from '../../services/auth';
+import { login, isAuthenticated, logout } from '../../services/auth';
 
 import { Form, Container, Btn } from './styles';
 
@@ -24,7 +24,7 @@ export default function SignIn() {
             })
                 .then(res => {
                     login(res.data);
-                    return <Redirect to="/Main" />;
+                    if (isAuthenticated()) window.location.href = '/Home';
                 })
                 .catch(err => {
                     setError(
